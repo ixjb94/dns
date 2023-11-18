@@ -1,3 +1,4 @@
+Opt("TrayMenuMode", 1)
 #RequireAdmin
 #include <ButtonConstants.au3>
 #include <GUIConstantsEx.au3>
