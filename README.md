@@ -2,7 +2,7 @@ DNS changer for Windows, Using Powershell and Autoit.
 
 ![alt text](https://raw.githubusercontent.com/ixjb94/dns/master/Preview1.png "(Preview) DNS - By IX JB")
 
-#### Google
+####  Google
 8.8.8.8     
 8.8.4.4
 
