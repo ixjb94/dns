@@ -1,16 +1,17 @@
 Opt("TrayMenuMode", 1)
 #RequireAdmin
+
 #include <ButtonConstants.au3>
 #include <GUIConstantsEx.au3>
 #include <WindowsConstants.au3>
-
-#Region ### START Koda GUI section ### Form=C:\App\@ixjb94\dns\DNS.kxf
+#Region ### START Koda GUI section ### Form=E:\App\@ixjb94\dns\DNS.kxf
 $DNS = GUICreate("DNS", 194, 108, -1, -1)
 $setGoogle = GUICtrlCreateButton("Google", 8, 8, 75, 25)
 $setRadar = GUICtrlCreateButton("Radar", 112, 40, 75, 25)
 $setCloudflare = GUICtrlCreateButton("Cloudflare", 112, 8, 75, 25)
 $set403 = GUICtrlCreateButton("403", 8, 40, 75, 25)
-$unset = GUICtrlCreateButton("Unset", 8, 72, 75, 25)
+$setShecan = GUICtrlCreateButton("Shecan", 8, 72, 75, 25)
+$unset = GUICtrlCreateButton("Unset", 112, 72, 75, 25)
 GUICtrlSetBkColor(-1, 0xC8C8C8)
 GUISetState(@SW_SHOW)
 #EndRegion ### END Koda GUI section ###
@@ -30,7 +31,8 @@ While 1
             setDNS("403")
         Case $setRadar
             setDNS("Radar")
-
+		Case $setShecan
+            setDNS("Shecan")
         ;~ Unset
         Case $unset
             unsetDNS()
@@ -58,8 +60,12 @@ Func setDNS($kind)
     ElseIf $kind == "Radar" Then
         $first  = "10.202.10.10"
         $second = "10.202.10.11"
-    EndIf
 
+	ElseIf $kind == "Shecan" Then
+        $first  = "178.22.122.100"
+        $second = "185.51.200.2"
+    EndIf
+	
     Run(@ComSpec & ' /c powershell "foreach ($c in Get-NetAdapter) { write-host ''Setting DNS for'' $c.interfaceName ; Set-DnsClientServerAddress -InterfaceIndex $c.interfaceindex -ServerAddresses (''' & $first & ''', ''' & $second & ''') }"', "", @SW_HIDE)
     MsgBox(0, "Set Done", $kind & " Done")
 EndFunc
